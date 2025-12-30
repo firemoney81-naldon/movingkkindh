@@ -1,23 +1,531 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <!-- Schema.org FAQ 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "인천 이사청소 비용은 왜 업체마다 다른가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "청소할 공간의 평수, 오염도, 짐의 유무(이사청소/거주청소), 특수 청소(곰팡이, 묵은 때 등) 옵션 여부, 그리고 업체별 인건비 및 장비 수준에 따라 비용이 달라집니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "이사청소와 입주청소의 차이점은 무엇인가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "입주청소는 새로 지은 아파트나 주택에 입주하기 전 먼지 제거 및 실내 정돈을 하는 청소입니다. 이사청소는 기존 거주자가 살던 공간의 묵은 때, 기름때, 곰팡이 등을 제거하는 청소로, 입주청소보다 난이도가 높고 시간이 오래 걸릴 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "인천 지역에서 청소 예약 시 비용 절약 팁이 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "비수기나 주중에 예약하면 할인 혜택을 받을 수 있으며, 짐을 미리 정리하거나 오염도가 심한 부분을 사전에 제거하면 청소 시간을 단축하여 비용을 줄일 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "청소 작업 시간은 얼마나 걸리나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "일반적으로 20~30평대 아파트 이사청소 기준으로 4~8시간 정도 소요됩니다. 오염도나 짐의 양에 따라 변동될 수 있습니다. 자세한 일정은 현장 상황에 따라 상담을 통해 확정합니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+  <style>
+    :root {
+      --primary-color: #007BFF; /* Primary blue for trust */
+      --secondary-color: #4CAF50; /* Green for cleanliness/nature */
+      --accent-color: #FFC107; /* Highlight yellow for attention */
+      --highlight-color: #E6F7E9; /* Light green background */
+      --text-color: #333333; /* Dark text for readability */
+      --bg-light: #F0F4F8; /* Light gray background */
+      --bg-white: #ffffff;
+      --btn-color: #FF6F61; /* Orange-red CTA */
+      --btn-hover: #E65C4F;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin:0; padding:0;
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      line-height:1.7;
+    }
+    .container {
+      max-width: 1000px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+    header {
+      background-color: var(--primary-color);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--bg-white);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+      font-weight:700;
+    }
+    header h1 a {
+      color: var(--bg-white);
+      text-decoration: none;
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--bg-light));
+      color: var(--text-color);
+      text-align: center;
+      padding: 90px 20px;
+    }
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight:700;
+      color: var(--primary-color);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    .hero p {
+      font-size: 1.4em;
+      margin-bottom: 35px;
+      color: var(--text-color);
+    }
+    .cta-btn {
+      background-color: var(--btn-color);
+      color: var(--bg-white);
+      padding: 18px 45px;
+      font-size:1.3em;
+      font-weight: bold;
+      border:none;
+      border-radius:50px;
+      cursor:pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .cta-btn:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-3px);
+    }
+    .compare-form-box {
+      background-color: var(--bg-white);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+    .compare-form-box h2 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 25px;
+      font-size:2em;
+      font-weight:700;
+    }
+    .compare-form-box label {
+      display: block;
+      margin-bottom:8px;
+      font-weight:500;
+    }
+    .compare-form-box input, .compare-form-box select {
+      width:100%;
+      padding:12px;
+      margin-bottom:20px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      box-sizing:border-box;
+    }
+    .content-section {
+      margin-top: 40px;
+      background-color: var(--bg-white);
+      padding: 60px 0;
+      border-radius:10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .content-section h2 {
+      font-size: 2.8em;
+      color: var(--primary-color);
+      margin-bottom:30px;
+      font-weight:700;
+      text-align:center;
+    }
+    .content-section h3 {
+      font-size:1.8em;
+      color: var(--secondary-color);
+      margin-top:30px;
+      margin-bottom:15px;
+      font-weight:700;
+    }
+    .feature-grid {
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top:30px;
+    }
+    .feature-grid .item {
+      width: calc(33.33% - 20px);
+      margin:10px;
+      padding:25px;
+      background-color: var(--highlight-color);
+      border-radius:10px;
+      text-align:center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-grid .item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .feature-grid .item img {
+      width:80px; height:80px;
+      margin-bottom:15px;
+      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+    .keyword-list {
+      list-style:none;
+      padding:0;
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top:30px;
+    }
+    .keyword-list li {
+      background-color: var(--secondary-color);
+      color: var(--bg-white);
+      padding:10px 20px;
+      margin:5px;
+      border-radius:20px;
+      font-weight:500;
+      transition: background-color 0.3s;
+    }
+    .keyword-list li:hover {
+        background-color: #388E3C;
+    }
+    .faq-item {
+      border-bottom:1px solid #ddd;
+      padding:20px 0;
+    }
+    .faq-item h3 {
+      cursor:pointer;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      font-size:1.4em;
+      color: var(--primary-color);
+    }
+    .faq-item h3::after {
+      content: '+';
+      font-size:1.5em;
+      color: var(--secondary-color);
+      transition: transform 0.3s;
+    }
+    .faq-item.active h3::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+    .faq-item p {
+      display: none;
+      padding-top:10px;
+      color:#555;
+      font-size:1.1em;
+    }
+    .faq-item.active p {
+      display: block;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 1.1em;
+    }
+    th, td {
+        border: 1px solid #eee;
+        padding: 15px;
+        text-align: center;
+    }
+    th {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        font-weight: 700;
+    }
+    td:first-child {
+        font-weight: bold;
+        background-color: var(--highlight-color);
+    }
+    ul, ol {
+        padding-left: 20px;
+    }
+    @media (max-width:768px) {
+      .hero h1 { font-size:2.4em; }
+      .hero p { font-size:1.2em; }
+      .cta-btn { padding:15px 30px; font-size:1.1em; }
+      .compare-form-box { padding:25px; }
+      .content-section h2 { font-size:2.2em; }
+      .feature-grid .item { width:100%; margin:10px 0; }
+      .keyword-list li { margin:3px; font-size:0.9em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">인천이사청소 및 입주청소 전문</a></h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>인천 지역 이사청소, 2026년 최신 청소 서비스로 쾌적하게</h1>
+        <p>이사 후 묵은 때와 찌든 때, 새 집의 미세먼지까지! 인천 전 지역 입주 및 이사청소 전문 업체 비교 플랫폼</p>
+        <div class="compare-form-box">
+          <h2>인천 이사청소 비용 무료 견적 요청</h2>
+          <p>간단한 정보 입력으로 인천 내 청소 전문가들의 견적을 비교하고 최적의 업체를 선택하세요.</p>
+          <form action="#" method="post">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+
+            <label for="area">이사/청소 지역 (인천)</label>
+            <select id="area" name="area" required>
+                <option value="">지역을 선택하세요</option>
+                <option value="연수구">연수구</option>
+                <option value="남동구">남동구</option>
+                <option value="미추홀구">미추홀구</option>
+                <option value="서구">서구</option>
+                <option value="부평구">부평구</option>
+                <option value="계양구">계양구</option>
+                <option value="중구">중구</option>
+                <option value="동구">동구</option>
+                <option value="강화군">강화군</option>
+                <option value="옹진군">옹진군</option>
+            </select>
+
+            <label for="type">청소 유형</label>
+            <select id="type" name="type" required>
+                <option value="">청소 유형을 선택하세요</option>
+                <option value="이사청소">이사청소 (살던 집 청소)</option>
+                <option value="입주청소">입주청소 (새 집 청소)</option>
+                <option value="거주청소">거주청소 (거주 중 청소)</option>
+            </select>
+
+            <label for="size">평형대</label>
+            <input type="number" id="size" name="size" placeholder="예: 30평" required>
+
+            <label for="date">예상 청소 희망일</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit" class="cta-btn">무료 견적 요청하기</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>인천 이사청소 서비스, 2026년 청소 트렌드 분석</h2>
+        <p>이사청소는 단순한 청소가 아닌, 새로운 보금자리를 위한 필수 과정입니다. 특히 인천은 신규 아파트 단지 조성과 노후 주택 단지가 혼재되어 있어 청소 환경이 다양합니다. 2026년 현재, 청소 서비스는 단순히 먼지를 제거하는 것을 넘어 환경 보호와 건강까지 고려한 전문 서비스로 진화하고 있습니다. 저희는 이러한 트렌드를 반영하여 인천 지역 맞춤형 청소 서비스를 제공합니다.</p>
+
+        <h3 style="margin-top:50px;">서비스 핵심 가치 (Core Services)</h3>
+        <div class="feature-grid">
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4CAF50/fff?text=ICON1" alt="전문 장비 아이콘">
+            <h3>전문 장비 활용</h3>
+            <p>고온 스팀 청소기, 친환경 약품, HEPA 필터가 장착된 진공청소기 등 전문 장비를 사용하여 눈에 보이지 않는 미세먼지와 세균까지 제거합니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4CAF50/fff?text=ICON2" alt="숨은 공간 청소 아이콘">
+            <h3>꼼꼼한 청소 범위</h3>
+            <p>주방 후드 찌든 때, 욕실 곰팡이, 창문 틀 먼지, 배수구 내부 등 숨겨진 공간의 오염까지 빠짐없이 제거하여 청결도를 극대화합니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/80/4CAF50/fff?text=ICON3" alt="고객 만족 보장 아이콘">
+            <h3>고객 만족 A/S</h3>
+            <p>청소 완료 후 고객과 함께 검수하는 과정을 거치며, 미흡한 부분은 즉시 재청소합니다. 며칠 후에도 발생할 수 있는 문제에 대해 신속하게 대응합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:50px;">함께 많이 찾는 키워드</h3>
+        <ul class="keyword-list">
+          <li>#인천이사청소</li>
+          <li>#인천입주청소</li>
+          <li>#인천청소업체추천</li>
+          <li>#인천이사청소후기</li>
+          <li>#인천빌라청소</li>
+          <li>#인천원룸청소</li>
+          <li>#인천서구청소</li>
+          <li>#인천연수구청소</li>
+          <li>#인천부평구청소</li>
+          <li>#이사청소비용</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>인천 지역 청소 서비스: 오염도에 따른 맞춤형 청소 프로세스 (2026년 기준)</h2>
+        <p>인천 지역의 주거 환경 특성상 구도심 지역의 노후 아파트나 빌라 청소는 묵은 때와 곰팡이 제거가 핵심입니다. 반면, 송도나 청라 등 신도시 지역의 새 아파트는 시멘트 가루, 건축 폐기물, 미세먼지 제거가 중요합니다. 저희는 각 환경에 맞춰 최적화된 청소 프로세스를 적용합니다.</p>
+
+        <h3>1단계: 청소 전 준비 및 오염도 진단</h3>
+        <p>청소 전문가가 현장에 도착하면 가장 먼저 청소할 공간의 오염도를 꼼꼼하게 진단합니다. 청소 범위에 포함되지 않는 짐이나 가구가 남아있을 경우 고객과 협의하여 조치합니다. 특히 묵은 때나 곰팡이, 찌든 때가 심한 곳을 집중적으로 체크하여 맞춤형 약품 및 장비를 준비합니다.</p>
+        <ul>
+            <li>현장 오염도 및 면적 확인: 묵은 때, 곰팡이, 기름때 등 오염 유형 파악.</li>
+            <li>청소 범위 협의: 추가 비용이 발생하는 특수 청소(예: 베란다 곰팡이, 주방 후드 분해) 여부 결정.</li>
+            <li>청소 전 보양 작업: 가구 또는 청소하지 않는 부분에 대한 보호 작업.</li>
+        </ul>
+
+        <h3>2단계: 기본 청소 및 부분 분해 청소</h3>
+        <p>창틀, 유리창, 방충망 등 외부 먼지가 유입되는 부분을 우선 청소합니다. 이후 싱크대 하부장, 서랍장, 붙박이장 등 분리가 가능한 부분을 모두 분해하여 내부 먼지와 이물질을 제거합니다. 찌든 때가 심한 주방 후드나 배수구 덮개 등도 분해하여 세척합니다.</p>
+        <ul>
+            <li>창틀/창문: 창틀의 틈새 먼지와 묵은 때를 제거하고 유리창을 닦아냅니다. (외부 유리창은 청소 범위에 포함되지 않을 수 있습니다)</li>
+            <li>주방: 싱크대 상하부장 내부 및 외부, 가스레인지 주변 기름때 제거, 후드 필터 청소.</li>
+            <li>욕실: 타일 사이 곰팡이 제거, 배수구 내부 소독, 세면대/변기 청소.</li>
+        </ul>
+
+        <h3>3단계: 스팀 살균 및 마무리 청소</h3>
+        <p>고온 스팀 청소기를 사용하여 욕실, 주방, 베란다 등 세균 번식 우려가 있는 공간을 살균 처리합니다. 특히 아이가 있는 가정의 경우 친환경 살균제를 사용하여 인체에 무해하도록 조치합니다. 청소 후에는 모든 표면을 다시 한번 닦아내고 정리합니다.</p>
+        <ul>
+            <li>바닥 청소: 청소기로 먼지 흡입 후 바닥 재질에 맞는 세정제로 닦아냅니다.</li>
+            <li>살균/소독: 고온 스팀을 활용하여 곰팡이 및 세균을 살균합니다.</li>
+            <li>마무리 점검: 청소 상태를 고객과 함께 최종 확인합니다.</li>
+        </ul>
+
+        <h3>4단계: 청소 후 검수 및 사후 관리 (A/S)</h3>
+        <p>청소가 완료되면 고객이 직접 청소 상태를 검수합니다. 만약 미진한 부분이 있다면 현장에서 즉시 재청소를 진행합니다. 사후 관리를 철저히 하여 고객 만족도를 높이는 것이 2026년 청소 업체의 핵심 경쟁력입니다.</p>
+
+        <p>이러한 프로세스를 통해 인천 미추홀구, 연수구, 남동구 등 다양한 지역의 주거 환경에 최적화된 청소 서비스를 제공합니다. 특히 새롭게 조성되는 청라, 송도, 영종도 지역의 입주청소는 새집증후군 완화를 위한 피톤치드 시공 옵션도 함께 제공하고 있습니다.</p>
+
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>인천 이사청소 비용 분석: 2026년 기준 청소 단가표 (예시)</h2>
+        <p>인천 지역의 이사청소 비용은 다양한 요소에 따라 결정됩니다. 평당 단가로 책정되는 것이 일반적이지만, 오염도와 서비스 범위에 따라 추가 비용이 발생할 수 있습니다. 2026년 기준 일반적인 청소 단가와 추가 요금 발생 요인을 정리했습니다.</p>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>청소 유형</th>
+                        <th>평당 단가 (VAT 별도)</th>
+                        <th>일반적인 소요 시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>입주청소 (신축)</td>
+                        <td>12,000원 ~ 15,000원</td>
+                        <td>4 ~ 6시간 (20평대 기준)</td>
+                    </tr>
+                    <tr>
+                        <td>이사청소 (일반)</td>
+                        <td>14,000원 ~ 18,000원</td>
+                        <td>5 ~ 8시간 (20평대 기준)</td>
+                    </tr>
+                    <tr>
+                        <td>이사청소 (심한 오염)</td>
+                        <td>18,000원 이상</td>
+                        <td>별도 협의</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>추가 요금 발생 요인</h3>
+        <p>청소 비용은 기본적으로 평당 단가로 계산되지만, 아래와 같은 특수 상황에서는 추가 요금이 발생할 수 있습니다.</p>
+        <ul>
+            <li><strong>특수 오염:</strong> 곰팡이 제거, 묵은 때, 스티커 및 접착제 제거, 반려동물 털 제거, 페인트 오염 등.</li>
+            <li><strong>공간 조건:</strong> 복층 구조, 층고가 높은 경우, 베란다 확장 유무, 붙박이장/시스템 에어컨 개수.</li>
+            <li><strong>서비스 옵션:</strong> 새집증후군 제거(피톤치드), 마루 코팅, 줄눈 시공 등.</li>
+            <li><strong>현장 접근성:</strong> 주차 공간 미확보 또는 엘리베이터가 없는 3층 이상의 계단식 주택.</li>
+        </ul>
+
+        <p>인천 부평구, 계양구 등 일부 지역은 주거 형태가 다양하여 정확한 견적을 위해서는 현장 방문 상담이 필요할 수 있습니다. 무료 견적 비교 시스템을 통해 여러 업체의 견적을 확인하는 것이 가장 합리적인 방법입니다.</p>
+
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+
+        <div class="faq-item">
+          <h3>이사청소와 입주청소 중 무엇을 선택해야 할까요?</h3>
+          <p>새집으로 이사할 경우 입주청소(새집증후군 유발 물질 제거 및 건축 분진 청소)를, 기존에 사람이 살던 집으로 이사할 경우 묵은 때 제거가 포함된 이사청소를 선택하는 것이 좋습니다. 거주 환경과 오염도에 따라 적합한 청소 유형을 선택하세요. 특히 인천은 산업 단지 근처 주거지가 많아 미세먼지와 매연에 대한 청소가 중요합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>청소 당일 준비해야 할 사항이 있나요?</h3>
+          <p>청소 당일에는 청소 전문가들이 원활하게 작업을 진행할 수 있도록 수도와 전기를 사용할 수 있어야 합니다. 짐은 모두 외부로 반출되어 있어야 하며, 청소 용품은 업체에서 모두 준비하므로 별도로 준비하실 필요는 없습니다. 다만, 귀중품이나 중요 서류는 미리 따로 보관해 주시는 것이 좋습니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>청소 후 발생하는 문제에 대한 A/S 기간은 어떻게 되나요?</h3>
+          <p>대부분의 전문 청소 업체는 청소 완료 직후 고객 검수를 통해 미흡한 부분을 즉시 재청소합니다. 현장 검수 후 청소 품질에 문제가 있을 경우, 일정 기간(보통 1~3일) 이내에 A/S를 신청하면 재방문하여 청소해 드립니다. 단, 고객의 부주의나 시간이 지나 자연적으로 발생하는 오염은 제외될 수 있습니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>인천 지역 특성상 청소할 때 고려해야 할 점이 있나요?</h3>
+          <p>인천은 바다와 인접한 지역이 많아 습기로 인한 곰팡이 발생률이 높습니다. 특히 연수구, 미추홀구, 서구 등 구도심 지역의 노후 주택은 곰팡이 제거가 필수적이며, 신축 아파트는 공사 잔해물과 새집증후군 완화에 중점을 두어야 합니다. 저희는 지역별 특성을 고려한 맞춤형 솔루션을 제공합니다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+        <p>이사청소 서비스를 선택할 때 알아두면 좋은 법규, 표준 서비스 내용 및 소비자 보호 관련 정보입니다.</p>
+        <ul>
+          <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%B2%AD%EC%86%8C%EC%82%B0%EC%97%85%EC%A7%84%ED%9D%A5%EB%B2%95" target="_blank" rel="noopener">청소산업 진흥법 (법제처)</a></li>
+          <li><a href="https://www.kca.go.kr/home/sub.do?menu_id=07020100" target="_blank" rel="noopener">소비자 24 (한국소비자원) - 이사 및 청소 서비스 관련 소비자 피해주의보</a></li>
+          <li><a href="https://www.gov.kr/portal/lawService.do?menuId=2&query=%EC%9D%B4%EC%82%AC%EC%B2%AD%EC%86%8C" target="_blank" rel="noopener">정부 민원포털 - 이사청소 관련 신고 및 정보</a></li>
+          <li><a href="https://ko.wikipedia.org/wiki/%EC%B2%AD%EC%86%8C%EC%84%9C%EB%B9%84%EC%8A%A4" target="_blank" rel="noopener">청소 서비스 - 위키백과</a></li>
+          <li><a href="https://www.me.go.kr/home/web/main.do" target="_blank" rel="noopener">환경부 - 친환경 청소 및 새집증후군 정보</a></li>
+        </ul>
+        <p>위 자료들은 이사청소 업체 선정 시 법적 기준, 서비스 표준, 소비자 권리 등에 대한 객관적인 정보를 제공합니다.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>인천이사청소</strong> &copy; 2025 All Rights Reserved.</p>
+      <p>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">문의하기</a>
+      </p>
+      <p>본 사이트는 인천 지역 이사청소 서비스 비교 정보를 제공하며, 실제 계약은 선택하신 업체와 직접 진행됩니다.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ 토글 기능
+    document.querySelectorAll('.faq-item h3').forEach(item => {
+      item.addEventListener('click', event => {
+        const parent = item.parentElement;
+        parent.classList.toggle('active');
+      });
+    });
+  </script>
+
+
+  
